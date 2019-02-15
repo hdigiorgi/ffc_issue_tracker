@@ -53,13 +53,13 @@
               var single = [
                 '<div class="issue '+openstatus+'">',
                 '<p class="id">id: '+ele._id+'</p>',
-                '<h3>'+ele.issue_title+' -  ('+openstatus+')</h3>',
+                '<h3>'+ele.title+' -  ('+openstatus+')</h3>',
                 '<br>',
-                '<p>'+ele.issue_text+'</p>',
-                '<p>'+ele.status_text+'</p>',
+                '<p>'+ele.text+'</p>',
+                '<p>'+ele.status+'</p>',
                 '<br>',
-                '<p class="id"><b>Created by:</b> '+ele.created_by+'  <b>Assigned to:</b> '+ele.assigned_to,
-                '<p class="id"><b>Created on:</b> '+ele.created_on+'  <b>Last updated:</b> '+ele.updated_on,
+                '<p class="id"><b>Created by:</b> '+ele.createdBy+'  <b>Assigned to:</b> '+ele.assignedTo,
+                '<p class="id"><b>Created on:</b> '+ele.createdOn+'  <b>Last updated:</b> '+ele.updatedOn,
                 '<br><a href="#" class="closeIssue" id="'+ele._id+'">close?</a> <a href="#" class="deleteIssue" id="'+ele._id+'">delete?</a>',
                 '</div>'
                 

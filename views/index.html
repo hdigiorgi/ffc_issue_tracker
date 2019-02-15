@@ -39,7 +39,7 @@
     <div id='testui' style='margin-left: 5%'>
       <h2 style="text-align: left">API Tests:</h2>
       <h3>Submit issue on <i>apitest</i></h3>
-      <form id="testForm" class="border">
+      <form id="form_create" class="border">
         <input type="text" name="issue_title" placeholder="*Title" style="width: 100px" required=''><br>
         <textarea type="text" name="issue_text" placeholder="*Text" style="width: 100px" required=''></textarea><br>
         <input type="text" name="created_by" placeholder="*Created by" style="width: 100px" required=''><br>
@@ -48,7 +48,7 @@
         <button type="submit">Submit Issue</button>
       </form><br>
       <h3>Update issue on <i>apitest</i> (Change any or all to update issue on the _id supplied)</h3>
-      <form id="testForm2" class="border">
+      <form id="form_update" class="border">
         <input type="text" name="_id" placeholder="*_id" style="width: 100px" required=''><br>
         <input type="text" name="issue_title" placeholder="(opt)Title" style="width: 100px"><br>
         <textarea type="text" name="issue_text" placeholder="(opt)Text" style="width: 100px"></textarea><br>
@@ -59,7 +59,7 @@
         <button type="submit">Submit Issue</button>
       </form><br>
       <h3>Delete issue on <i>apitest</i></h3>
-      <form id="testForm2" class="border">
+      <form id="form_delete" class="border">
         <input type="text" name="_id" placeholder="_id" style="width: 100px" required=''><br>
         <button type="submit">Delete Issue</button>
       </form>
@@ -72,38 +72,44 @@
             crossorigin="anonymous"></script>
     <script>
       $(function() {
-        $('#testForm').submit(function(e) {
+        function setError(jqxhr) {
+          $('#jsonResult').text(jqxhr.responseText);
+        }
+        function setSuccess(data) {
+          $('#jsonResult').text(JSON.stringify(data));
+        }
+
+        $('#form_create').submit(function(e) {
+          e.preventDefault();
           $.ajax({
             url: '/api/issues/apitest',
             type: 'post',
-            data: $('#testForm').serialize(),
+            data: $('#form_create').serialize(),
             success: function(data) {
               $('#jsonResult').text(JSON.stringify(data));
             }
           });
-          e.preventDefault();
         });
-        $('#testForm2').submit(function(e) {
+        $('#form_update').submit(function(e) {
+          e.preventDefault();
           $.ajax({
             url: '/api/issues/apitest',
             type: 'put',
-            data: $('#testForm2').serialize(),
+            data: $('#form_update').serialize(),
             success: function(data) {
               $('#jsonResult').text(JSON.stringify(data));
             }
           });
-          e.preventDefault();
         });
-        $('#testForm3').submit(function(e) {
+        $('#form_delete').submit(function(e) {
+          e.preventDefault();
           $.ajax({
             url: '/api/issues/apitest',
             type: 'delete',
-            data: $('#testForm3').serialize(),
-            success: function(data) {
-              $('#jsonResult').text(JSON.stringify(data));
-            }
+            data: $('#form_delete').serialize(),
+            success: setSuccess,
+            error: setError
           });
-          e.preventDefault();
         });
       });
    </script>
