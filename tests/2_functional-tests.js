@@ -29,19 +29,19 @@ suite('Functional Tests', function() {
         })
         .end(function(err, res){
           assert.equal(res.status, 200);
-          
-          //fill me in too!
-          
+          fail()
           done();
         });
       });
       
       test('Required fields filled in', function(done) {
-        
+        fail();
+        done();
       });
       
       test('Missing required fields', function(done) {
-        
+        fail();
+        done();
       });
       
     });
@@ -49,15 +49,18 @@ suite('Functional Tests', function() {
     suite('PUT /api/issues/{project} => text', function() {
       
       test('No body', function(done) {
-        
+        fail();
+        done();
       });
       
       test('One field to update', function(done) {
-        
+        fail();
+        done();
       });
       
       test('Multiple fields to update', function(done) {
-        
+        fail();
+        done();
       });
       
     });
@@ -85,11 +88,13 @@ suite('Functional Tests', function() {
       });
       
       test('One filter', function(done) {
-        
+        fail();
+        done();
       });
       
       test('Multiple filters (test for multiple fields you know will be in the db for a return)', function(done) {
-        
+        fail();
+        done();
       });
       
     });
@@ -97,11 +102,13 @@ suite('Functional Tests', function() {
     suite('DELETE /api/issues/{project} => text', function() {
       
       test('No _id', function(done) {
-        
+        fail();
+        done();
       });
       
       test('Valid _id', function(done) {
-        
+        fail();
+        done();
       });
       
     });
