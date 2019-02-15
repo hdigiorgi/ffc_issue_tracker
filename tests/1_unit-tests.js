@@ -23,7 +23,9 @@ suite('Unit Tests', () => {
 
     test('create new', done => {
         setTimeout(done, 15000);
-        issue.create(inputProject, inputIssue).then( r => {
+        issue.create(inputProject, inputIssue).then( data => {
+            assert.notExists(data.error);
+            const r = data.result;
             assert.equal(r.projectName, inputProject)
             assert.equal(r.title, inputIssue.issue_title)
             assert.equal(r.createdBy, inputIssue.created_by)
@@ -50,7 +52,8 @@ suite('Unit Tests', () => {
             open: false
         }
         issue.update(inputProject, created._id, modifications).then(updateRes => {
-            assert.equal(updateRes, 'successfully updated')
+            assert.notExists(updateRes.error)
+            assert.equal(updateRes.result, 'successfully updated')
             issue.getById(created._id).then(modified => {
                 assert.equal(modified.projectName, inputProject)
                 assert.equal(modified.title, modifications.issue_title)
@@ -67,14 +70,14 @@ suite('Unit Tests', () => {
 
     test('get existing', done => {
         setTimeout(done, 15000);
-        issue.get(inputProject + "__non_existing__").then(r => {
-            assert.lengthOf(r, 0)
+        issue.get(inputProject + "__non_existing__").then(data => {
+            assert.lengthOf(data.result, 0)
         })
         .then(() => issue.get(inputProject))
-        .then(r => {
-            assert.isArray(r)
-            assert.isOk(r.length >= 1)
-            r.forEach(item => {
+        .then(d => {
+            assert.isArray(d.result)
+            assert.isOk(d.result.length >= 1)
+            d.result.forEach(item => {
                 assert.strictEqual(item.projectName, inputProject)
             })
             done();
@@ -84,7 +87,7 @@ suite('Unit Tests', () => {
     test('delete existing', done => {
         setTimeout(done, 15000);
         issue.remove(inputProject, created._id).then(r => {
-            assert.strictEqual(r, `deleted ${created._id}`);
+            assert.strictEqual(r.result, `deleted ${created._id}`);
         }).then(_ => {
             return issue.getById(created._id)
         }).then(search => {
